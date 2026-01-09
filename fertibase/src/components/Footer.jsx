@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Brand Section with Image */}
           <div>
             <motion.div whileHover={{ scale: 1.05 }} className="flex items-center mb-4">
-              <img src={LOGOS.main} alt="Fertibase Logo" className="w-2xl h-36 mr-44 object-contain" />
+              <img src={LOGOS.main} alt="Fertibase Logo" className="w-2xl h-36 mr-44 object-contain bg-transparent" style={{ backgroundColor: 'transparent' }} />
 
             </motion.div>
             <p className="text-text-light leading-relaxed">

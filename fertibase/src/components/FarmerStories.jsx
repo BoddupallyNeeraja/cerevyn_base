@@ -101,36 +101,36 @@ export default function FarmerStories() {
           ))}
         </motion.div>
 
-        {/* Video Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Video Cards (vertical, Instagram-style 9:16) */}
+        <div className="flex flex-col items-center gap-8">
           {filteredStories.map((story, index) => (
             <motion.div
               key={story.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-primary-100"
+              className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-primary-100"
             >
-              {/* Video Thumbnail */}
-              <div className="relative aspect-video overflow-hidden bg-soil-dark cursor-pointer group">
+              {/* Video Thumbnail - Instagram (9:16) */}
+              <div
+                className="relative overflow-hidden bg-soil-dark cursor-pointer group w-full"
+                style={{ aspectRatio: '9 / 16' }}
+                onClick={() => {
+                  if (story.videoUrl && story.videoUrl !== "#") {
+                    window.open(story.videoUrl, '_blank');
+                  } else {
+                    alert(`Video for "${story.title}" will be available soon!`);
+                  }
+                }}
+              >
                 <img
                   src={story.image}
                   alt={story.title}
                   className="w-full h-full object-cover"
                 />
                 {/* Play Button Overlay */}
-                <div 
-                  onClick={() => {
-                    if (story.videoUrl && story.videoUrl !== "#") {
-                      window.open(story.videoUrl, '_blank');
-                    } else {
-                      // Fallback: You can add a modal or default video here
-                      alert(`Video for "${story.title}" will be available soon!`);
-                    }
-                  }}
-                  className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-                >
+                <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="bg-primary-600 rounded-full p-4 transform hover:scale-110 transition-transform">
                     <Play className="h-8 w-8 text-soil-base" fill="currentColor" />
                   </div>
@@ -142,27 +142,35 @@ export default function FarmerStories() {
               </div>
 
               {/* Card Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-text-base mb-3 line-clamp-2">
+              <div className="p-4">
+                <h3 className="text-lg font-bold text-text-base mb-2 line-clamp-2">
                   {story.title}
                 </h3>
-                <p className="text-text-base mb-4 text-sm font-medium">
-                  {story.location}
-                </p>
-                <button
-                  onClick={() => {
-                    if (story.videoUrl && story.videoUrl !== "#") {
-                      window.open(story.videoUrl, '_blank');
-                    } else {
-                      // Fallback: You can add a modal or default video here
-                      alert(`Video for "${story.title}" will be available soon!`);
-                    }
-                  }}
-                  className="w-full bg-primary-600 hover:bg-primary-700 text-soil-base font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors duration-300"
-                >
-                  <Play className="h-5 w-5" fill="currentColor" className="h-5 w-5 text-soil-base" />
-                  Watch Video
-                </button>
+                <p className="text-text-base mb-3 text-sm font-medium">{story.location}</p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      if (story.videoUrl && story.videoUrl !== "#") {
+                        window.open(story.videoUrl, '_blank');
+                      } else {
+                        alert(`Video for "${story.title}" will be available soon!`);
+                      }
+                    }}
+                    className="flex-1 bg-primary-600 hover:bg-primary-700 text-soil-base font-semibold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors duration-300"
+                  >
+                    <Play className="h-5 w-5 text-soil-base" />
+                    Watch Video
+                  </button>
+                  <button
+                    onClick={() => {
+                      // Placeholder for share or save action
+                      alert('Shared!');
+                    }}
+                    className="px-4 py-2 border border-primary-100 rounded-lg text-sm font-medium"
+                  >
+                    Share
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}

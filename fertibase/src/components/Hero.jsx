@@ -15,6 +15,18 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-14 md:pt-28"
     >
+      {/* ✅ FertiBase Title Above Background */}
+      <div className="relative z-20 text-center mb-8 pt-8">
+        <motion.h1
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-6xl font-extrabold text-soil-base drop-shadow-lg"
+        >
+          FertiBase
+        </motion.h1>
+      </div>
+
       {/* ✅ Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -35,8 +47,6 @@ export default function Hero() {
           transition={{ duration: 1 }}
         >
           <h1 className="text-5xl md:text-7xl font-extrabold text-soil-base mb-6 leading-tight drop-shadow-lg">
-            FertiBase 
-            <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-primary-300">
               The Foundation of Fertile Fields
             </span>
